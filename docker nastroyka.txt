@@ -1,0 +1,47 @@
+----------------Dockerfile----------------
+
+FROM openjdk:17-jdk-alpine
+ARG JAR_FILE=target/*.jar
+COPY ${JAR_FILE} app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]
+
+------------------------------------------
+
+application.properties ni ichida localhost o'zgartiriladi
+
+spring.datasource.url=jdbc:postgresql://host.docker.internal:5432/otm
+
+----------------------------------------------------------------------
+
+./mvnw clean
+
+./mvnw package
+
+
+docker build -t spring/serverforotm .
+
+
+docker images
+
+
+docker run -p 8080:8080 -t spring/serverforotm
+
+
+
+------------------Dockerni imageni saqlash-----------------------------
+
+docker save -o D:\PDP\serverforotm.tar spring/serverforotm
+
+
+--------------------Import qilish--------------------------------------
+
+docker load -i D:\PDP\serverforotm.tar
+
+
+
+
+
+
+
+
+
